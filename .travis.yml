@@ -1,0 +1,11 @@
+sudo: required
+language: generic
+services:
+  - dockerfile
+before_install:
+  - echo "start dockerfile"
+  - docker build -t navi0208/docker-react-app -f Dockerfile.dev .
+script:
+  - docker run -e CI=true navi0208/docker-react-app npm run test -- --coverage
+after_success:
+  - echo "test success"
